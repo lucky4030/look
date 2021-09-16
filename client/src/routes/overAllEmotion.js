@@ -23,10 +23,10 @@ const useStyles = makeStyles((theme) => ({
 
 function barStyle( percentage ){
   const pulse = keyframes`from{
-        width: 250px;
+        width: 350px;
     }
     to{
-        width: ${percentage*300 + 250}px;
+        width: ${percentage*300 + 350}px;
     }`;
 
     return styled.div`
@@ -38,8 +38,8 @@ function barStyle( percentage ){
     height: 70px;
     position: relative;
     animation-name: ${pulse};
-    animation-duration: 3s;
-    animation-iteration-count: 2;
+    animation-duration: 7s;
+    animation-iteration-count: 1;
     animation-fill-mode: forwards;
   `;
 
@@ -68,21 +68,21 @@ function OverAllEmotion ( props ){
         });
         
         emotionCount.forEach ( element => { 
-            if( maxEmotionCalle !== element && maxEmotionCountCalle < emotionCountOfCalle[element] ) {
+            if(  maxEmotionCountCalle < emotionCountOfCalle[element] ) {
                 maxEmotionCalle = element;
                 maxEmotionCountCalle = emotionCountOfCalle[element];
             }
-            if( maxEmotionCaller !== element && maxEmotionCountCaller < emotionCountOfCaller[element] ) {
+            if(  maxEmotionCountCaller < emotionCountOfCaller[element] ) {
                 maxEmotionCaller = element;
                 maxEmotionCountCaller = emotionCountOfCaller[element];
             }   
         });
 
-    
+        // maxEmotionCaller = max( emotionCountOfCaller["angary"] , emotionCountOfCaller["happy"] , emotionCountOfCaller["neutral"]  , emotionCountOfCaller["sad"]);
         let callerPer = (maxEmotionCountCaller/ photos.length ) * 100;
         let callePer = (maxEmotionCountCalle/ photos.length ) * 100;
         var emotionMap={'angry': '😠','disgust': '🤢', 'fear': '😱', 'happy':'😁', 'sad': '☹️', 'surprise': '😮', 'neutral' : '😐'};
-        console.log( emotionMap[maxEmotionCaller] + callerPer );
+        // console.log( emotionMap[maxEmotionCaller] + callerPer );
         
         // book collection for given emotion
         
@@ -121,10 +121,10 @@ function OverAllEmotion ( props ){
             <Grid>
               <Paper className={classes.paper}>
                 <br/>
-                <HappyBar > Happy 😁 {emotionCountOfCaller["happy"]/photos.length*100 }% </HappyBar>
-                <NeutralBar> Neutral😐{emotionCountOfCaller["neutral"]/photos.length*100 }% </NeutralBar>
-                <SadBar > Sad ☹️{emotionCountOfCaller["sad"]/photos.length*100 }% </SadBar>
-                <AngryBar> Angry 😠{emotionCountOfCaller["angry"]/photos.length*100 }% </AngryBar>
+                <HappyBar > Happy 😁 { (emotionCountOfCaller["happy"]/photos.length*100).toFixed(1) }% </HappyBar>
+                <NeutralBar> Neutral😐{(emotionCountOfCaller["neutral"]/photos.length*100).toFixed(1) }% </NeutralBar>
+                <SadBar > Sad ☹️{(emotionCountOfCaller["sad"]/photos.length*100).toFixed(1) }% </SadBar>
+                <AngryBar> Angry 😠{(emotionCountOfCaller["angry"]/photos.length*100).toFixed(1) }% </AngryBar>
                 <br/>
               </Paper>
               <Paper className={classes.paper} >
