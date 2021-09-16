@@ -22,6 +22,8 @@ export default function ImgMediaCard(props) {
 
   props.items.forEach( item => {
         console.log(item.link);
+        let photoAdd = "";
+        if( item.photo !==  undefined ) photoAdd = item.photo.smallThumbnail;
         cards.push( 
              <div style = { { display:"block" } } >
             <Card className={classes.root}>
@@ -30,7 +32,7 @@ export default function ImgMediaCard(props) {
                 component="img"
                 alt={item.title}
                 height="140"
-                image={item.photo.smallThumbnail}
+                image={photoAdd}
                 title={item.title}
                 />
                 <CardContent>

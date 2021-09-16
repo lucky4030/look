@@ -1,12 +1,13 @@
-import React  from "react";
+import React , { useState }  from "react";
 
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import axios from "axios";
+
 import styled, { keyframes } from 'styled-components'
 import  ImgMediaCard from './card'
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     root4: {
@@ -50,7 +51,8 @@ function OverAllEmotion ( props ){
     let maxEmotionCaller = 'happy' , maxEmotionCountCaller = 0;
     var photos ; 
 
-    
+    const [ cards , setcards ] = useState( [ ] );
+
     photos = localStorage.getItem('photos'); //console.log(photos);
     if( localStorage.getItem('photos') )
     {
@@ -85,8 +87,8 @@ function OverAllEmotion ( props ){
         // book collection for given emotion
         
         var list1=[];
-        // var cards = [];
-        axios.get(`https://www.googleapis.com/books/v1/volumes?q=${maxEmotionCaller}+inauthor:keyes&key=AIzaSyCJFblW8qHFl8RX0PCsbRzVH1ntWhBgsM0`)
+
+        axios.get(`https://www.googleapis.com/books/v1/volumes?q=${maxEmotionCaller}+inauthor:keyes&key=AIzaSyCuZr0YMzeP9337Lj2zVVeg5ew1C9eUFaw`)
         .then((res)=>{
             let data= res.data.items;
             for(let i=0;i<6;i++)
@@ -97,19 +99,17 @@ function OverAllEmotion ( props ){
                           "photo":data[i].volumeInfo.imageLinks,
                             };
                 
-                list1.push(obj);
-                
+                list1.push(obj);   
             }
-           // console.log( );
-            //console.log(res.data.items[0])
+            setcards( list1 );
         })
         .catch((err)=>console.log(err));
 
       
-          const Flexbar = styled.div`
-          display: flex;
-          flex-direction: row;
-        `;
+        //   const Flexbar = styled.div`
+        //   display: flex;
+        //   flex-direction: row;
+        // `;
           
         let SadBar = barStyle( emotionCountOfCaller["sad"]/photos.length );
         let HappyBar = barStyle( emotionCountOfCaller["happy"]/photos.length );
@@ -130,7 +130,7 @@ function OverAllEmotion ( props ){
               <Paper className={classes.paper} >
                 <h1>Looking very {maxEmotionCaller}!! Here are few books you would prefer to read!</h1>
               <Grid container spacing={3}>
-                <Flexbar > <ImgMediaCard items={list1} /> </Flexbar>
+                 < ImgMediaCard items={cards} />
               </Grid>
               </Paper>
             </Grid>
