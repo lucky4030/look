@@ -164,7 +164,7 @@ const Room = (props) => {
         
         if ( ! peerRef.current === null ) peerRef.current.close();
         console.log("cam closed!!");
-        console.log(photos);
+        // console.log(photos);
         localStorage.setItem('photos' , JSON.stringify(photos) );
         setTimeout(props.history.push('/') , 60000);
         
@@ -173,14 +173,13 @@ const Room = (props) => {
     function handleCapture(){
         if( !(userVideo.current === "undefined") && ! ( partnerVideo === "indefined" ) )
             {
-                // console.log( userVideo.current );
                 var cnt = 0;
                 alert("moment capturing started!");
                 function mytimer(){
 
                     var photo =  PhotoCapture( );
                     // photos.push(photo);
-                    console.log(photo);
+                    // console.log(photo);
                     // // photo => [ baseurl , baseurl ]
                     // api call data.photo[0] & data.photo[1] =>  state +"#" + emoji 
                     let axiosConfig = {
@@ -194,7 +193,7 @@ const Room = (props) => {
                     var a={'angry': '😠','disgust': '🤢', 'fear': '😱', 'happy':'😁', 'sad': '☹️', 'surprise': '😮', 'neutral' : '😐'};
                     var payload = [ { 'state':'neutral'  , 'emoji':'😐' , 'baseurl': "photo[0]" } , { 'state': 'neutral' , 'emoji':'😐' , 'baseurl':"photo[1]" } ];
                     
-                    axios.post("http://139.59.45.17:4567/" ,  { "baseurl": photo[0] } , axiosConfig )
+                    axios.post("http://143.110.249.208:1111/" ,  { "baseurl": photo[0] } , axiosConfig )
                     .then(r => { 
                         console.log(r);
                         data1 = r.data; 
@@ -203,7 +202,7 @@ const Room = (props) => {
                     } )
                     .catch(e => console.log(e) );
 
-                    axios.post("http://139.59.45.17:4567/" ,  { "baseurl": photo[1] } , axiosConfig )
+                    axios.post("http://143.110.249.208:1111/" ,  { "baseurl": photo[1] } , axiosConfig )
                     .then(r => { 
                         console.log(r); data2 = r.data; 
                         payload[1]['state'] = data2.slice(0 , data2.length-3 );
@@ -218,7 +217,7 @@ const Room = (props) => {
                     const status = localStorage.getItem('cam');
                     if( cnt === 7 && status ) clearInterval(myvar);
                 }
-                var myvar = setInterval( mytimer , 60000);
+                var myvar = setInterval( mytimer , 6000);
                 
             }
     }

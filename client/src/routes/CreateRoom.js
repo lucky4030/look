@@ -1,4 +1,5 @@
 import React , { useState , useEffect } from "react";
+import OverAllEmotion from "./overAllEmotion";
 import { v1 as uuid } from "uuid";
 
 import TextField from '@material-ui/core/TextField';
@@ -92,7 +93,6 @@ const CreateRoom = (props) => {
                     <Grid item xs={3}>
                       <Button id="createbtn" onClick={createRoom} variant="contained" color="primary" >Create Room</Button> 
                     </Grid>
-                     
                     {/* <input type="text" id="roomId" onChange= { ( Event) => setInput( Event.target.value ) }></input> */}
                     <Grid item xs={3}>
                       <TextField required id="roomId" label="Enter RoomId" defaultValue="" onChange= { ( Event) => setInput( Event.target.value ) } />
@@ -103,6 +103,7 @@ const CreateRoom = (props) => {
                     </Grid>
                 </Grid>
             </div>
+            < OverAllEmotion />
             <div>{cards}</div>
           </div>;
 }
