@@ -230,7 +230,7 @@ const Room = (props) => {
                 <video id = "video" autoPlay ref={userVideo} width="100%" height ="100%"></video>
                 <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
-                    User
+                    Customer
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
                     room Id : { props.match.params.roomID } 
@@ -253,7 +253,7 @@ const Room = (props) => {
                 <video id="partnerVideo" autoPlay ref={partnerVideo} width="100%" height ="100%"></video>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Partner
+                        Retailer
                     </Typography>
                 </CardContent>
             </CardActionArea>
